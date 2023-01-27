@@ -100,3 +100,7 @@ export const login = async (req, res) => {
     console.log(err);
   }
 };
+
+export const secret = async (req, res) => {
+  res.json({ currentUser: req.user });
+};
