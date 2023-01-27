@@ -1,15 +1,23 @@
 import express from "express";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
+import authRoutes from "./routes/auth.js";
+import router from "./routes/auth.js";
 
 dotenv.config();
 
 const app = express();
 
-app.get("/users", (req, res) => {
-  res.json({
-    data: "Hemanth Kumar R",
-  });
-});
+//db
+mongoose.set("strictQuery", true);
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("DB Connected"))
+  .catch((err) => console.log("DB ERROR =>", err));
+
+// router middleware
+
+app.use("/api", authRoutes);
 
 const port = process.env.PORT || 8000;
 
