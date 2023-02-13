@@ -12,14 +12,7 @@ export default function PrivateRoute() {
 
   useEffect(() => {
     const authCheck = async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/auth-check`,
-        {
-          headers: {
-            Authorization: auth?.token,
-          },
-        }
-      );
+      const { data } = await axios.get(`/auth-check`);
       if (data.ok) {
         setOk(true);
       } else {
@@ -27,8 +20,7 @@ export default function PrivateRoute() {
       }
     };
 
-    // if (auth?.token)
-    authCheck();
+    if (auth?.token) authCheck();
   }, [auth?.token]);
 
   // useEffect(() => {
